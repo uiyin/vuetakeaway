@@ -7,6 +7,7 @@ import FastClick from 'fastclick'
 import '@/assets/styles/css/reset.css'
 import '@/assets/styles/css/border.css'
 import '@/assets/styles/css/iconfont.css'
+import store from './store/index.js'
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 
@@ -14,6 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
