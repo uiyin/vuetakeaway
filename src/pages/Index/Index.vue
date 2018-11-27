@@ -3,10 +3,7 @@
     <Header></Header>
     <Nav></Nav>
     <Zhezhao v-if="flag"></Zhezhao>
-    <div class="content">
-      <LeftMenu :dataall="goods"></LeftMenu>
-      <RightContent :dataall="goods"></RightContent>
-    </div>
+    <Content :dataall="goods"></Content>
 
   </div>
 </template>
@@ -15,23 +12,22 @@
 import Header from '@/pages/common/Header.vue'
 import Nav from '@/pages/common/Nav.vue'
 import Zhezhao from '@/pages/common/Zhezhao.vue'
-import LeftMenu from '@/pages/Index/components/MenuLeft.vue'
-import RightContent from '@/pages/Index/components/ContentRight.vue'
+import Content from '@/pages/Index/components/Content.vue'
 import { mapState } from 'vuex'
 import getdata from '@/axios/api.js'
 export default {
   data () {
     return {
       message: '首页',
-      goods: {}
+      goods: {},
+      signal: false
     }
   },
   components: {
     Header,
     Nav,
     Zhezhao,
-    LeftMenu,
-    RightContent
+    Content
   },
   created () {
     this.getgoods()
@@ -42,6 +38,9 @@ export default {
     })
   },
   methods: {
+    changeIndex (content) {
+      this.signal = content
+    },
     getgoods () {
       let _this = this
       let obj = {
@@ -61,14 +60,4 @@ export default {
 </script>
 
 <style scoped lang="less">
-.content {
-  display: flex;
-  flex-flow: row nowrap;
-  position: absolute;
-  left: 0px;
-  top: 3.48rem;
-  bottom: 1.16rem;
-  right: 0px;
-  z-index: -2;
-}
 </style>
