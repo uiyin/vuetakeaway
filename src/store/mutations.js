@@ -3,5 +3,6 @@ let mutations = {
   alterflag (state, flag) {
     state.gonggaoflag = flag
   }
+  // 改变购物车
 }
 export default mutations

@@ -1,3 +1,4 @@
 export default {
-  gonggaoflag: false
+  gonggaoflag: false,
+  shopcar: []
 }
