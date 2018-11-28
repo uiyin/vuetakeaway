@@ -51,7 +51,9 @@
                   <p class="sellcount">月售{{item2.sellCount}}份 <span class="haoping"> 好评率{{item2.rating}}%</span></p>
                   <p class="newprice">￥{{item2.price}} <span class="oldprice"
                           v-show="item2.oldPrice"> ￥{{item2.oldPrice}}</span></p>
-
+                  <!--小球组件开始-->
+                  <ShopBall @ballmove="balldo"></ShopBall>
+                  <!--小球组件结束-->
                 </div>
               </div>
 
@@ -67,6 +69,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import ShopBall from '@/pages/common/ShopBall'
 export default {
   data () {
     return {
@@ -77,17 +80,18 @@ export default {
       heightall: [],
       scrollY: 0, // 用户滚动的距离
       guoduIndex: 0, // 为了和activeMenu过渡使用
-      topMenu: 0
+      topMenu: 0 // 滚动到第四个以后菜单要滚动的距离
     }
   },
   props: ['dataall'],
-  created () {
-
+  components: {
+    ShopBall
   },
   mounted () {
     let _this = this
     this.initbetterscroll()
     this.initbetterscrollcontent()
+    // 等待页面渲染完毕
     setTimeout(() => {
       _this.getallHeight()
     }, 1000)
@@ -165,6 +169,12 @@ export default {
     changeactive (index) {
       let wrapper = this.$refs.contentall.getElementsByClassName('contentitem')
       this.scrollall.scrollToElement(wrapper[index], 300)
+    },
+    // 小球运动
+    balldo (target) {
+      // console.log(target)
+      // 在发射出去到购物车那个大环境下
+      this.$emit('ballmove', target)
     }
   }
 }
@@ -210,7 +220,7 @@ export default {
             height: 0.4rem;
             display: block;
             float: left;
-             margin-top: 2px;
+            margin-top: 2px;
             margin-right: 0.1rem;
           }
         }
@@ -233,7 +243,7 @@ export default {
     }
     .itemclass {
       background: white;
-      padding: 0.36rem 0.36rem;
+      padding: 0.36rem 0.16rem;
       padding-bottom: 0px;
       .itemcontentall {
         display: flex;
@@ -249,6 +259,7 @@ export default {
         .rightcontent {
           flex: 1;
           margin-left: 0.2rem;
+          position: relative; //给小球
           .title {
             font-size: 18px;
             color: rgb(7, 17, 27);

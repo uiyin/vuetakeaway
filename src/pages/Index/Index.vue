@@ -3,9 +3,11 @@
     <Header></Header>
     <Nav></Nav>
     <Zhezhao v-if="flag"></Zhezhao>
-    <Content :dataall="goods"></Content>
+    <Content :dataall="goods"
+             @ballmove="getdom"></Content>
     <ShopCar :dataall="shopdata"
-             :sellercontent="seller"></ShopCar>
+             :sellercontent="seller"
+             ref="shopcar"></ShopCar>
   </div>
 </template>
 
@@ -73,6 +75,13 @@ export default {
         }
         console.log(_this.seller)
       })
+    },
+    // 获取到传递过来的DOM
+    getdom (target) {
+      // console.log(target)
+      // 获取到了DOM节点了然后传递给shopcar
+      // 调用shopcar里面的方法
+      this.$refs.shopcar.drop(target)
     }
   }
 }
