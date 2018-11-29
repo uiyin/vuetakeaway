@@ -1,11 +1,14 @@
 <template>
   <div class="shopball">
-    <Ballmove>
-      <div class="desc"
-           v-show="count>0"
-           slot="jianfa"
-           @click="desc">-</div>
-    </Ballmove>
+    <div class="yundong">
+      <transition name="fade">
+        <div class="desc"
+             v-show="count>0"
+             @click="desc">
+          <div class="inner in_move"> - </div>
+        </div>
+      </transition>
+    </div>
     <div class="count"
          v-show="count>0">{{count}}</div>
     <div class="add"
@@ -14,7 +17,7 @@
 </template>
 
 <script>
-import Ballmove from '@/pages/common/Ballmove'
+
 import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
@@ -39,20 +42,42 @@ export default {
     desc () {
       this.count--
     }
-  },
-  components: {
-    Ballmove
   }
 
 }
 </script>
 
 <style scoped lang="less">
+@keyframes bounce-in {
+  0% {
+    transform: translate(0.56rem, 0);
+    opacity: 0;
+  }
+  25% {
+    transform: translate(0.48rem, 0);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate(0.28rem, 0);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(0.19rem, 0);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(0rem, 0);
+    opacity: 1;
+  }
+}
 .shopball {
   position: absolute;
   right: 0.1rem;
   bottom: 0px;
   font-size: 20px;
+  .yundong {
+    float: left;
+  }
   .add,
   .desc {
     width: 0.48rem;
@@ -63,6 +88,26 @@ export default {
     background: #0190d4;
     text-align: center;
     float: left;
+    .in_move {
+      width: 0.48rem;
+      height: 0.48rem;
+      transform: rotate(0deg);
+      transition: all 0.4s;
+    }
+    &.fade-enter,
+    &.fade-leave {
+      .in_move {
+        transform: rotate(360deg);
+      }
+    }
+    &.fade-enter-active {
+      animation: bounce-in 0.4s linear;
+    }
+    /*动画开始到结束有*/
+
+    &.fade-leave-active {
+      animation: bounce-in 0.4s linear reverse;
+    }
   }
   .count {
     width: 0.48rem;
