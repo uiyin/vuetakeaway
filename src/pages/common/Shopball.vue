@@ -17,30 +17,77 @@
 </template>
 
 <script>
-
 import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      message: '小球',
-      count: 0
+      message: '小球'
     }
   },
+  props: ['data'],
   computed: {
     ...mapState({
       shopcarcontent: 'shopcar'
-    })
+    }),
+    ballobj () {
+      let value = this.data
+      let obj = {
+        name: value.name, // 获取到name
+        price: value.price, // 获取到价格
+        count: 1 // 购买的数量
+      }
+      return obj
+    },
+    count () {
+      let result = this.data
+      let shopdata = this.shopcarcontent
+      for (let i = 0; i < shopdata.length; i++) {
+        if (result.name === shopdata[i].name) {
+          return shopdata[i].count
+        }
+      }
+      return 0
+    }
   },
   methods: {
     ...mapMutations(['changeshopcar']),
     add (e) {
       // console.log(e)
-      this.count++
+      let shopdata = this.shopcarcontent
+      let shopball = this.ballobj
+      let data = this.data
+      let count = 0 // 查重
+      if (shopdata.length === 0) {
+        shopdata.push(shopball)
+      } else {
+        for (let i = 0; i < shopdata.length; i++) {
+          if (shopdata[i].name !== data.name) {
+            count++
+          } else {
+            shopdata[i].count++
+          }
+        }
+        if (count === shopdata.length) {
+          shopdata.push(shopball)
+        }
+      }
+      this.changeshopcar(shopdata)
       // 把自定义事件和自己这个元素发射出去 说白了也就是这个元素<div data-v-47756ef6 class="add">+</div>
       this.$emit('ballmove', e.target)
     },
     desc () {
-      this.count--
+      let shopdata = this.shopcarcontent
+      let data = this.data
+      for (let i = 0; i < shopdata.length; i++) {
+        if (shopdata[i].name === data.name) {
+          if (shopdata[i].count === 0) {
+            shopdata.splice(i, 1)
+          } else {
+            shopdata[i].count--
+          }
+          this.changeshopcar(shopdata)
+        }
+      }
     }
   }
 

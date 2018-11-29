@@ -52,7 +52,8 @@
                   <p class="newprice">￥{{item2.price}} <span class="oldprice"
                           v-show="item2.oldPrice"> ￥{{item2.oldPrice}}</span></p>
                   <!--小球组件开始-->
-                  <ShopBall @ballmove="balldo"></ShopBall>
+                  <ShopBall @ballmove="balldo"
+                            :data="item2"></ShopBall>
                   <!--小球组件结束-->
                 </div>
               </div>

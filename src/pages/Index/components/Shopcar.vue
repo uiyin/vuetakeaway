@@ -25,7 +25,7 @@
       </div>
     </div>
     <!--小球动画开始-->
-    <div class="ball-container">
+    <div :class="[allprice>miniprice?'ball-container active':'ball-container']">
       <!--循环小球，小球出现与否取决于属性show-->
       <transition v-for="(item,index) in balls"
                   :key="index"
@@ -96,7 +96,7 @@ export default {
       let value = this.dataall
       let result = 0
       value.forEach((item, index) => {
-        result += item.count * item.newprice
+        result += item.count * item.price
       })
       return result
     },
@@ -270,6 +270,11 @@ export default {
   }
   .ball-container {
     flex: 0 0 0.32rem;
+    background: #141d27;
+    &.active {
+      background: green;
+    }
+
     .ball {
       &.v-enter-active {
         /* 可以在上面的工具里跳出自己想要的曲线，调整参数 */
