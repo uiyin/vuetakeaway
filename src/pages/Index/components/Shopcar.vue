@@ -2,7 +2,8 @@
   <div class="shopcar">
     <div class="shopcarleft">
       <div class="shopcarwrapper">
-        <div :class="[dataall.length>0?'shopcarcontent active':'shopcarcontent']">
+        <div :class="[dataall.length>0?'shopcarcontent active':'shopcarcontent']"
+             @click="showshopcar">
           <div class="iconfont icon-gouwuchekong shopcaricon"></div>
         </div>
         <div class="righticon"
@@ -17,10 +18,16 @@
     </div>
     <div class="shopcarright">
       <div class="jiesuan"
-           v-if="allprice>=miniprice">
+           v-if="allprice>=miniprice&&(!flag)"
+           @click="showshopcar">
         结算
       </div>
-      <div else>
+      <div class="jiesuan"
+           v-if="allprice>=miniprice&&flag"
+           @click="fukuan">
+        付款
+      </div>
+      <div v-if="allprice<miniprice">
         ￥ {{miniprice}}元起送
       </div>
     </div>
@@ -82,7 +89,7 @@ export default {
       dropBalls: []
     }
   },
-  props: ['dataall', 'sellercontent'],
+  props: ['dataall', 'sellercontent', 'flag'],
   computed: {
     countnum () {
       let value = this.dataall
@@ -108,6 +115,16 @@ export default {
     }
   },
   methods: {
+    fukuan () {
+      let allprice = this.allprice + this.sellerpeisong
+      window.alert('您一共消费' + allprice + '元')
+    },
+    showshopcar () {
+      let value = this.dataall.length
+      if (value > 0) {
+        this.$emit('showbottom', true)
+      }
+    },
     drop (target) {
       // console.log(target)
       // 这个作用就是筛选出来balls里面的show为false变成true,放到dropBalls里面
@@ -179,6 +196,7 @@ export default {
   background: #141d27;
   display: flex;
   flex-flow: row nowrap;
+  z-index: 10;
   .shopcarleft {
     flex: 1;
     height: 100%;
