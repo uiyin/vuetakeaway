@@ -144,7 +144,7 @@ export default {
   .bgzhezhao {
     .weizhi();
     background: rgba(0, 0, 0, 0.8);
-    filter: blur(2px);
+    filter: blur(1px);
     z-index: -1;
   }
   .gonggaocontent {

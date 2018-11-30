@@ -29,15 +29,6 @@ export default {
     ...mapState({
       shopcarcontent: 'shopcar'
     }),
-    ballobj () {
-      let value = this.data
-      let obj = {
-        name: value.name, // 获取到name
-        price: value.price, // 获取到价格
-        count: 1 // 购买的数量
-      }
-      return obj
-    },
     count () {
       let result = this.data
       let shopdata = this.shopcarcontent
@@ -52,13 +43,16 @@ export default {
   methods: {
     ...mapMutations(['changeshopcar']),
     add (e) {
-      // console.log(e)
       let shopdata = this.shopcarcontent
-      let shopball = this.ballobj
       let data = this.data
+      let obj2 = {
+        name: data.name, // 获取到name
+        price: data.price, // 获取到价格
+        count: 1 // 购买的数量
+      }
       let count = 0 // 查重
       if (shopdata.length === 0) {
-        shopdata.push(shopball)
+        shopdata.push(obj2)
       } else {
         for (let i = 0; i < shopdata.length; i++) {
           if (shopdata[i].name !== data.name) {
@@ -68,7 +62,7 @@ export default {
           }
         }
         if (count === shopdata.length) {
-          shopdata.push(shopball)
+          shopdata.push(obj2)
         }
       }
       this.changeshopcar(shopdata)
@@ -80,7 +74,7 @@ export default {
       let data = this.data
       for (let i = 0; i < shopdata.length; i++) {
         if (shopdata[i].name === data.name) {
-          if (shopdata[i].count === 0) {
+          if (shopdata[i].count === 1) {
             shopdata.splice(i, 1)
           } else {
             shopdata[i].count--
@@ -88,6 +82,7 @@ export default {
           this.changeshopcar(shopdata)
         }
       }
+      console.log(this.shopcarcontent)
     }
   }
 

@@ -7,7 +7,16 @@
              @ballmove="getdom"></Content>
     <ShopCar :dataall="shopdata"
              :sellercontent="seller"
-             ref="shopcar"></ShopCar>
+             ref="shopcar"
+             @showbottom="changeshopcar"
+             :flag="shopcarflag"></ShopCar>
+    <GoTop>
+      <BottomShop v-show="shopcarflag"
+                  @closeflag="changeflag"
+                  slot="movetop"
+                  @ballmove="getdom"></BottomShop>
+    </GoTop>
+
   </div>
 </template>
 
@@ -17,6 +26,8 @@ import Nav from '@/pages/common/Nav.vue'
 import Zhezhao from '@/pages/common/Zhezhao.vue'
 import Content from '@/pages/Index/components/Content.vue'
 import ShopCar from '@/pages/Index/components/ShopCar'
+import BottomShop from '@/pages/Index/components/BottomShopcar'
+import GoTop from '@/pages/Index/components/TransitonTop'
 import { mapState } from 'vuex'
 import getdata from '@/axios/api.js'
 export default {
@@ -24,7 +35,8 @@ export default {
     return {
       message: '首页',
       goods: {},
-      seller: {}
+      seller: {},
+      shopcarflag: false
     }
   },
   components: {
@@ -32,7 +44,9 @@ export default {
     Nav,
     Zhezhao,
     Content,
-    ShopCar
+    ShopCar,
+    BottomShop,
+    GoTop
   },
   created () {
     this.getgoods()
@@ -45,6 +59,12 @@ export default {
     })
   },
   methods: {
+    changeflag (content) {
+      this.shopcarflag = content
+    },
+    changeshopcar (content) {
+      this.shopcarflag = content
+    },
     changeIndex (content) {
       this.signal = content
     },
