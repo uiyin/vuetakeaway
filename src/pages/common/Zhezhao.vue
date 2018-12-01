@@ -1,80 +1,80 @@
 <template>
-  <div>
-    <div class="zhezhao">
-      <!--背景开始-->
-      <div class="bgzhezhao"></div>
-      <!--背景结束-->
-      <!--头部开始-->
-      <div class="header">
-        {{dataall.name}}
-      </div>
-      <!--头部结束-->
-      <!--星星开始-->
-      <div class="star">
-        <span class="starimg"
-              v-for="(item,index) in result"
-              :key="index">
-          <img :src="starimg"
-               v-if="index<score"
-               alt="">
-          <img :src="failstarimg"
-               v-if="index>=score"
-               alt="">
-        </span>
 
-      </div>
-      <!--星星结束-->
-      <!--优惠信息开始-->
-      <div class="youhui">
-        <div class="line"></div>
-        <div class="text">优惠信息</div>
-        <div class="line"></div>
-      </div>
-      <!--优惠信息结束-->
-      <!--优惠信息内容开始-->
-      <div class="youhuicontent">
-        <div class="youhuiitem"
-             v-for="(item,index) in dataall.supports"
-             :key="index">
-
-          <img :src="jianimg"
-               alt=""
-               class="youhuiicon"
-               v-if="item.type==0">
-          <img :src="zheimg"
-               alt=""
-               class="youhuiicon"
-               v-else-if="item.type==1">
-          <img :src="teimg"
-               alt=""
-               class="youhuiicon"
-               v-else-if="item.type==2||3||4">
-
-          <div class="text2">{{item.description}}</div>
-        </div>
-
-      </div>
-      <!--优惠信息内容结束-->
-      <!--优惠信息开始-->
-      <div class="youhui">
-        <div class="line"></div>
-        <div class="text">商家公告</div>
-        <div class="line"></div>
-      </div>
-      <!--优惠信息结束-->
-      <!--商家公告内容开始-->
-      <div class="gonggaocontent">
-        {{dataall.bulletin}}
-      </div>
-      <!--商家公告内容结束-->
-      <!--尾巴开始-->
-      <div class="bottom">
-        <div class="iconfont icon-guanbi iconstyles"
-             @click="flagchange"></div>
-      </div>
-      <!--尾巴结束-->
+  <div class="zhezhao">
+    <!--背景开始-->
+    <div class="bgzhezhao"></div>
+    <!--背景结束-->
+    <!--头部开始-->
+    <div class="header">
+      {{dataall.name}}
     </div>
+    <!--头部结束-->
+    <!--星星开始-->
+    <div class="star">
+      <span class="starimg"
+            v-for="(item,index) in result"
+            :key="index">
+        <img :src="starimg"
+             v-if="index<score"
+             alt="">
+        <img :src="failstarimg"
+             v-if="index>=score"
+             alt="">
+      </span>
+
+    </div>
+    <!--星星结束-->
+    <!--优惠信息开始-->
+    <div class="youhui">
+      <div class="line"></div>
+      <div class="text">优惠信息</div>
+      <div class="line"></div>
+    </div>
+    <!--优惠信息结束-->
+    <!--优惠信息内容开始-->
+    <div class="youhuicontent">
+      <div class="youhuiitem"
+           v-for="(item,index) in dataall.supports"
+           :key="index">
+
+        <img :src="jianimg"
+             alt=""
+             class="youhuiicon"
+             v-if="item.type==0">
+        <img :src="zheimg"
+             alt=""
+             class="youhuiicon"
+             v-else-if="item.type==1">
+        <img :src="teimg"
+             alt=""
+             class="youhuiicon"
+             v-else-if="item.type==2||3||4">
+
+        <div class="text2">{{item.description}}</div>
+      </div>
+
+    </div>
+    <!--优惠信息内容结束-->
+    <!--优惠信息开始-->
+    <div class="youhui">
+      <div class="line"></div>
+      <div class="text">商家公告</div>
+      <div class="line"></div>
+    </div>
+    <!--优惠信息结束-->
+    <!--商家公告内容开始-->
+    <div class="gonggaocontent">
+      {{dataall.bulletin}}
+    </div>
+    <!--商家公告内容结束-->
+    <!--尾巴开始-->
+    <div class="bottom">
+      <div class="iconfont icon-guanbi iconstyles"
+           @click="flagchange"></div>
+    </div>
+    <!--尾巴结束-->
   </div>
+
 </template>
 
 <script>
@@ -141,6 +141,7 @@ export default {
 .zhezhao {
   .weizhi();
   overflow: hidden;
+  z-index: 100;
   .bgzhezhao {
     .weizhi();
     background: rgba(0, 0, 0, 0.8);

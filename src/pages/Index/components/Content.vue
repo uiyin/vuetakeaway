@@ -40,7 +40,8 @@
           <ul>
             <li v-for="(item2,index2) in item.foods"
                 :key="index2"
-                class="itemclass">
+                class="itemclass"
+                @click="gotourl(item2)">
               <div :class="[index2!=(item.foods.length-1)?'itemcontentall borderactive':'itemcontentall']">
                 <img :src="item2.icon"
                      class="imgicon"
@@ -124,6 +125,14 @@ export default {
     }
   },
   methods: {
+    gotourl (obj2) {
+      this.$router.push({
+        name: 'Detail',
+        params: {
+          data: obj2
+        }
+      })
+    },
     initbetterscroll () {
       let _this = this
       this.$nextTick(function () {
@@ -164,7 +173,6 @@ export default {
           heightall.push(height)
         }
         _this.heightall = heightall
-        console.log(_this.heightall)
       })
     },
     changeactive (index) {
@@ -185,12 +193,9 @@ export default {
 .content {
   display: flex;
   flex-flow: row nowrap;
-  position: absolute;
-  left: 0px;
-  top: 3.48rem;
-  bottom: 1.16rem;
-  right: 0px;
   z-index: -2;
+  width: 100%;
+  height: 100%;
   //左边
   .menubox {
     flex: 0 0 2.24rem;
