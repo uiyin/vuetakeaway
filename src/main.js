@@ -8,6 +8,10 @@ import '@/assets/styles/css/reset.css'
 import '@/assets/styles/css/border.css'
 import '@/assets/styles/css/iconfont.css'
 import store from './store/index.js'
+import Navigation from 'vue-navigation'
+Vue.use(Navigation, {
+  router
+})
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 

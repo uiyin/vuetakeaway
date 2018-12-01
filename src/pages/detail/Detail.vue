@@ -155,42 +155,7 @@ export default {
   name: 'Detail',
   data () {
     return {
-      dataall: {
-        'name': '皮蛋瘦肉粥',
-        'price': 12,
-        'oldPrice': 20,
-        'description': '咸粥',
-        'sellCount': 229,
-        'count': 0,
-        'rating': 100,
-        'info': '一碗皮蛋瘦肉粥，总是我到粥店时的不二之选。香浓软滑，饱腹暖心，皮蛋的Q弹与瘦肉的滑嫩伴着粥香溢于满口，让人喝这样的一碗粥也觉得心满意足',
-        'ratings': [
-          {
-            'username': '3******c',
-            'rateTime': 1469281964000,
-            'rateType': 0,
-            'text': '很喜欢的粥',
-            'avatar': 'http://static.galileo.xiaojukeji.com/static/tms/default_header.png'
-          },
-          {
-            'username': '2******3',
-            'rateTime': 1469271264000,
-            'rateType': 0,
-            'text': '',
-            'avatar': 'http://static.galileo.xiaojukeji.com/static/tms/default_header.png'
-          },
-          {
-            'username': '3******b',
-            'rateTime': 1469261964000,
-            'rateType': 1,
-            'text': '',
-            'avatar': 'http://static.galileo.xiaojukeji.com/static/tms/default_header.png'
-          }
-        ],
-        'icon': 'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114',
-        'image': 'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750'
-      },
-      // dataall: this.$route.params.data  // 获取的就是goods里面单个的
+      dataall: this.$route.params.data, // 获取的就是goods里面单个的
       seller: {},
       shopcarflag: false,
       dataflag: false, // 为了选择有用户评论还是没有评论的

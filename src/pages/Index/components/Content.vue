@@ -41,7 +41,7 @@
             <li v-for="(item2,index2) in item.foods"
                 :key="index2"
                 class="itemclass"
-                @click="gotourl(item2)">
+                @click="changeurl(item2)">
               <div :class="[index2!=(item.foods.length-1)?'itemcontentall borderactive':'itemcontentall']">
                 <img :src="item2.icon"
                      class="imgicon"
@@ -125,7 +125,7 @@ export default {
     }
   },
   methods: {
-    gotourl (obj2) {
+    changeurl (obj2) {
       this.$router.push({
         name: 'Detail',
         params: {
@@ -151,6 +151,7 @@ export default {
       this.$nextTick(function () {
         let wrapper = _this.$refs.contentwrapper
         _this.scrollall = new BScroll(wrapper, {
+          click: true,
           probeType: 3, // 这个属性必须有
           bounce: {
             top: false,

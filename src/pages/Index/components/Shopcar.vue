@@ -32,7 +32,7 @@
       </div>
     </div>
     <!--小球动画开始-->
-    <div :class="[allprice>miniprice?'ball-container active':'ball-container']">
+    <div :class="[allprice>=miniprice?'ball-container active':'ball-container']">
       <!--循环小球，小球出现与否取决于属性show-->
       <transition v-for="(item,index) in balls"
                   :key="index"
@@ -276,11 +276,14 @@ export default {
     flex: 0 0 2.1rem;
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
-    line-height: 58px;
+    line-height: 65px;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.4);
     font-weight: 700;
     .jiesuan {
+      width: 100%;
+      height: 100%;
+      line-height: 65px;
       text-align: center;
       background: green;
       color: white;
@@ -288,7 +291,8 @@ export default {
   }
   .ball-container {
     flex: 0 0 0.32rem;
-    background: #141d27;
+    background: rgba(0, 0, 0, 0.2);
+    height: 100%;
     &.active {
       background: green;
     }
