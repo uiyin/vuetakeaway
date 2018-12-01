@@ -4,15 +4,16 @@
       <transition name="fade">
         <div class="desc"
              v-show="count>0"
-             @click="desc">
+             @click.stop="desc">
           <div class="inner in_move"> - </div>
         </div>
       </transition>
     </div>
     <div class="count"
          v-show="count>0">{{count}}</div>
+    <!--加stop防止冒泡-->
     <div class="add"
-         @click="add($event)">+</div>
+         @click.stop="add($event)">+</div>
   </div>
 </template>
 

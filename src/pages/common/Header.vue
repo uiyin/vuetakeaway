@@ -101,7 +101,6 @@ export default {
         if (res.errno === 0) {
           _this.dataall = res.data
         }
-        console.log(_this.dataall)
       })
     }
   }

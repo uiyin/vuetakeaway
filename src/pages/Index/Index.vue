@@ -3,8 +3,13 @@
     <Header></Header>
     <Nav></Nav>
     <Zhezhao v-if="flag"></Zhezhao>
-    <Content :dataall="goods"
-             @ballmove="getdom"></Content>
+    <!--占位使用这样防止路由过渡时候底部组件上移-->
+    <div class="wrapper"
+         ref="wrappercontent">
+      <Content :dataall="goods"
+               @ballmove="getdom"></Content>
+    </div>
+
     <ShopCar :dataall="shopdata"
              :sellercontent="seller"
              ref="shopcar"
@@ -12,7 +17,7 @@
              :flag="shopcarflag"></ShopCar>
     <GoTop>
       <BottomShop v-show="shopcarflag"
-                  @closeflag="changeflag"
+                  @closeflag="changeshopcar"
                   slot="movetop"
                   @ballmove="getdom"></BottomShop>
     </GoTop>
@@ -37,6 +42,7 @@ export default {
       goods: {},
       seller: {},
       shopcarflag: false
+
     }
   },
   components: {
@@ -51,17 +57,20 @@ export default {
   created () {
     this.getgoods()
     this.getseller()
+    let boxheight = document.documentElement.clientHeight
+    this.$nextTick(() => {
+      let value = boxheight - 174 - 58// 设备减去头部和底部的高度
+      this.$refs.wrappercontent.style.height = value + 'px'
+    })
   },
   computed: {
     ...mapState({
       flag: 'gonggaoflag',
       shopdata: 'shopcar'
     })
+
   },
   methods: {
-    changeflag (content) {
-      this.shopcarflag = content
-    },
     changeshopcar (content) {
       this.shopcarflag = content
     },
@@ -79,7 +88,6 @@ export default {
         if (res.errno === 0) {
           _this.goods = res.data
         }
-        console.log(_this.goods)
       })
     },
     getseller () {
@@ -93,7 +101,6 @@ export default {
         if (res.errno === 0) {
           _this.seller = res.data
         }
-        console.log(_this.seller)
       })
     },
     // 获取到传递过来的DOM
@@ -108,4 +115,8 @@ export default {
 </script>
 
 <style scoped lang="less">
+.wrapper {
+  width: 100%;
+  padding-bottom: 1.16rem;
+}
 </style>
