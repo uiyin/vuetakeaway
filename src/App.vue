@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <transition :name="transitionName">
-      <router-view class="allcontent" />
+      <navigation>
+        <router-view class="allcontent" />
+      </navigation>
     </transition>
   </div>
 </template>
@@ -14,14 +16,14 @@ export default {
       transitionName: 'slide-left'
     }
   },
-  watch: {
-    '$route' (to, from) {
-      if (to.path === '/detail') {
-        this.transitionName = 'slide-left'
-      } else {
-        this.transitionName = 'slide-right'
-      }
-    }
+  created () {
+    // bind event ， 更多参数移步vue-navigation
+    this.$navigation.on('forward', (to, from) => {
+      this.transitionName = 'slide-left'
+    })
+    this.$navigation.on('back', (to, from) => {
+      this.transitionName = 'slide-right'
+    })
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pingjia">
     <Header></Header>
     <Nav></Nav>
     {{message}}
@@ -22,5 +22,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.pingjia {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
 </style>
