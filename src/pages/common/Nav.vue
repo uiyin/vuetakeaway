@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav">
-      <router-link to="/"
+      <router-link to="/index"
                    tag="div"
                    class="linka">商品</router-link>
       <router-link to="/pingjia"
@@ -37,7 +37,7 @@ export default {
     color: rgb(77, 85, 93);
     line-height: 0.8rem;
     text-align: center;
-    &.router-link-exact-active.router-link-active {
+    &.router-link-active {
       color: rgb(240, 20, 20);
     }
   }
