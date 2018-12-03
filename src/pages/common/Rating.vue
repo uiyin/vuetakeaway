@@ -30,7 +30,7 @@
         <div class="ratinglicontent">
           {{item.text?item.text:'此用户没有评论'}}
         </div>
-        <div v-if="item.recommend.length>0"
+        <div v-if="item.recommend"
              class="spanboxall">
           <div v-for="(item2,index2) in item.recommend"
                class="spanbox"
@@ -52,7 +52,7 @@
         <div class="ratinglicontent">
           {{item.text}}
         </div>
-        <div v-if="item.recommend.length>0"
+        <div v-if="item.recommend"
              class="spanboxall">
           <div v-for="(item2,index2) in item.recommend"
                class="spanbox"
@@ -76,7 +76,7 @@
         <div class="ratinglicontent">
           {{item.text?item.text:'此用户没有评论'}}
         </div>
-        <div v-if="item.recommend.length>0"
+        <div v-if="item.recommend"
              class="spanboxall">
           <div v-for="(item2,index2) in item.recommend"
                class="spanbox"
@@ -98,7 +98,7 @@
         <div class="ratinglicontent">
           {{item.text}}
         </div>
-        <div v-if="item.recommend.length>0"
+        <div v-if="item.recommend"
              class="spanboxall">
           <div v-for="(item2,index2) in item.recommend"
                class="spanbox"
@@ -122,6 +122,9 @@ export default {
       dataflag: false, // 为了选择有用户评论还是没有评论的
       kouwei: 2 // 默认是2选择的就是全部 2就是全部 0 就是推荐 1就是吐槽
     }
+  },
+  created () {
+    console.log(this.dataall)
   },
   computed: {
     tuijian () {
