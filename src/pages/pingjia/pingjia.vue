@@ -3,14 +3,17 @@
     <Header></Header>
     <Nav></Nav>
     <Rating :dataall="ratingall"></Rating>
+    <Zhezhao v-if="gonggaoflag"></Zhezhao>
   </div>
 </template>
 
 <script>
+import Zhezhao from '@/pages/common/Zhezhao'
 import Rating from '@/pages/common/Rating'
 import getdata from '@/axios/api.js'
 import Header from '@/pages/common/Header'
 import Nav from '@/pages/common/Nav'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -22,6 +25,7 @@ export default {
     this.getrating()
   },
   computed: {
+    ...mapState(['gonggaoflag']),
     ratingall () {
       let _this = this
       let value = this.rating
@@ -36,9 +40,11 @@ export default {
   components: {
     Header,
     Nav,
-    Rating
+    Rating,
+    Zhezhao
   },
   methods: {
+    ...mapMutations(['alterflag']),
     getrating () {
       let _this = this
       let obj = {

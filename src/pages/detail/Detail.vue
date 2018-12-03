@@ -38,7 +38,8 @@
     <!--分隔符结束-->
     <!--介绍开始-->
     <div class="goodsinfocontent">
-      <div class="contentheader">商品介绍</div>
+      <div class="contentheader"
+           @click="showdata">商品介绍</div>
       <div class="goodscontentinfo">
         {{dataall.info}}
       </div>
@@ -91,6 +92,7 @@ export default {
     ratingall () {
       let _this = this
       let value = this.dataall.ratings
+      console.log(value)
       let value2 = value.map((item, index) => {
         let time2 = _this.timestampToTime(item.rateTime)
         item.rateTime = time2
@@ -132,6 +134,10 @@ export default {
     Rating
   },
   methods: {
+    showdata () {
+      let _this = this
+      console.log(_this.ratingall)
+    },
     ...mapMutations(['changeshopcar']),
     timestampToTime (timestamp) {
       var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
